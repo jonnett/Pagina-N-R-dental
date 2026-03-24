@@ -20,3 +20,9 @@ nav{
 /*header,footer{                   es lo mismo que arriba
     font-size:50px;
 }*/
+#caja1{
+    background-color: bisque;
+}
+#caja2{
+    background-color: blueviolet;
+}
