@@ -6,7 +6,8 @@
 }
 
 :root {
-    --color-principal: #00bfa5; /* El turquesa de las fotos */
+    --color-principal: #00bfa5; 
+    --color-celeste: #00d4ff;   
     --color-oscuro: #008e7a;
     --color-texto: #333;
     --blanco: #ffffff;
@@ -17,6 +18,7 @@ body {
     line-height: 1.6;
     color: var(--color-texto);
     background-color: var(--blanco);
+    scroll-behavior: smooth;
 }
 
 header {
@@ -39,11 +41,6 @@ nav {
     font-size: 1.8rem;
 }
 
-.logo span {
-    color: var(--color-texto);
-    font-weight: 300;
-}
-
 .nav-menu {
     display: flex;
     list-style: none;
@@ -57,10 +54,6 @@ nav {
     transition: 0.3s;
 }
 
-.nav-menu a:hover {
-    color: var(--color-principal);
-}
-
 .btn-agenda {
     background-color: var(--color-principal);
     color: var(--blanco) !important;
@@ -70,17 +63,13 @@ nav {
 
 
 #inicio {
-    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('ruta-a-tu-foto.jpg');
     background-color: var(--color-principal);
     height: 80vh;
     display: flex;
     align-items: center;
     color: var(--blanco);
     padding: 0 5%;
-}
-
-.hero-container {
-    max-width: 600px;
+    text-align: left;
 }
 
 .hero-container h2 {
@@ -104,28 +93,36 @@ section {
     text-align: center;
 }
 
-
-.profesionales-container {
+.profesionales-container, .servicios-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 40px;
 }
 
-.profesional-card {
+.profesional-card, .servicio-card {
     background: var(--gris-claro);
     padding: 40px 20px;
     border-radius: 10px;
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
-    border-bottom: 5px solid var(--color-principal);
     cursor: pointer;
+    text-align: center;
 }
 
-.profesional-card h3 {
+.profesional-card {
+    border-bottom: 5px solid var(--color-principal);
+}
+
+.servicio-card {
+    border-bottom: 5px solid var(--color-celeste);
+}
+
+.profesional-card h3, .servicio-card h4 {
     color: var(--color-texto);
     font-size: 1.2rem;
+    transition: 0.3s;
 }
 
 
@@ -147,28 +144,30 @@ section {
     transform: translateY(-10px);
 }
 
-.profesional-card:hover h3 {
+
+.servicio-card:hover {
+    background: var(--color-celeste);
+    color: var(--blanco);
+    transform: translateY(-10px);
+}
+
+.profesional-card:hover h3, .servicio-card:hover h4 {
     color: var(--blanco);
 }
 
-.profesional-card:hover .info-extra {
-    max-height: 500px; /* Suficiente para el texto */
+.profesional-card:hover .info-extra, .servicio-card:hover .info-extra {
+    max-height: 500px;
     opacity: 1;
 }
 
-.servicios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+.llamar {
+    background-color: var(--color-principal);
+    color: var(--blanco) !important;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
 }
-
-.servicio-item {
-    background: var(--blanco);
-    border: 1px solid #eee;
-    padding: 20px;
-    border-radius: 8px;
-}
-
 
 footer {
     background: #222;
@@ -182,23 +181,13 @@ footer {
     gap: 40px;
 }
 
-.footer-info a {
+.footer-info a, .footer-links a {
     color: var(--color-principal);
     text-decoration: none;
 }
 
-/* celular */
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none; 
-    }
-    
-    .hamburger {
-        display: block;
-        cursor: pointer;
-    }
-
-    .hero-container h2 {
-        font-size: 2rem;
-    }
+    .nav-menu { display: none; }
+    .hamburger { display: block; cursor: pointer; }
+    .hero-container h2 { font-size: 2rem; }
 }
