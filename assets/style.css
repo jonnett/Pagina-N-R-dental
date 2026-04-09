@@ -186,8 +186,61 @@ footer {
     text-decoration: none;
 }
 
+
 @media (max-width: 768px) {
-    .nav-menu { display: none; }
-    .hamburger { display: block; cursor: pointer; }
-    .hero-container h2 { font-size: 2rem; }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%; 
+        top: 70px;   
+        flex-direction: column;
+        background-color: var(--blanco);
+        width: 100%;
+        height: 100vh;
+        gap: 30px;
+        padding-top: 50px;
+        transition: 0.5s; 
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    }
+
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background: var(--color-principal);
+        transition: 0.3s;
+    }
+
+    #menu-toggle:checked ~ .nav-menu {
+        left: 0;
+    }
+
+    #menu-toggle:checked ~ .hamburger span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    #menu-toggle:checked ~ .hamburger span:nth-child(2) {
+        opacity: 0; /* Desaparece la del medio */
+    }
+    #menu-toggle:checked ~ .hamburger span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .hero-container h2 {
+        font-size: 2rem;
+    }
+}
+
+
+@media (min-width: 769px) {
+    .hamburger {
+        display: none; 
+    }
 }
