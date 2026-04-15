@@ -243,4 +243,30 @@ footer {
     .hamburger {
         display: none; 
     }
+
+.servicio-card:nth-child(1) {
+    background-image: url("assets/img/endodoncia.jpg");
 }
+    
+.servicio-card:nth-child(2) {
+    background-image: url("assets/img/periodoncia.jpg");
+}
+    
+.servicio-card:nth-child(3) {
+    background-image: url("assets/img/ortodoncia.jpg");   
+}
+    
+.servicio-card:nth-child(4) {
+    background-image: url("assets/img/odontotopediatria.jpg");
+}
+
+.servicio-card:nth-child(5) {
+    background-image: url("assets/img/protesis.jpg");
+}
+
+.servicio-card:nth-child(6) {
+    background-image: url("assets/img/familiar.jpg");
+}
+
+
+    
