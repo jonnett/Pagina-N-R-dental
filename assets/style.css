@@ -116,7 +116,7 @@ section {
 }
 
 .servicio-card {
-    border-bottom: 5px solid var(--color-celeste);
+    border-bottom: 5px solid var(--color-principal);
 }
 
 .profesional-card h3, .servicio-card h4 {
@@ -146,7 +146,7 @@ section {
 
 
 .servicio-card:hover {
-    background: var(--color-celeste);
+    background: var(--color-principal);
     color: var(--blanco);
     transform: translateY(-10px);
 }
@@ -238,35 +238,125 @@ footer {
     }
 }
 
+.servicio-card {
+    height: 300px; /* Altura fija para que todas se vean iguales */
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Texto blanco para resaltar */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 5px solid var(--color-principal);
+}
+
+.servicio-card h4 {
+    color: #ffffff !important; /* Blanco puro */
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* Sombra negra para despegarlo del fondo */
+    z-index: 2;
+    transition: 0.3s;
+}
+
+/* 1. Definir primero las imágenes para todos los dispositivos */
+.servicio-card:nth-child(1) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/endodoncia.jpg"); }
+.servicio-card:nth-child(2) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/periodoncia.jpg"); }
+.servicio-card:nth-child(3) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/ortodoncia.jpg"); }
+.servicio-card:nth-child(4) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/odontopediatria.jpg"); }
+.servicio-card:nth-child(5) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/protesis.jpg"); }
+.servicio-card:nth-child(6) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/familiar.jpg"); }
 
 @media (min-width: 769px) {
-    .hamburger {
-        display: none; 
+    .servicio-card:nth-child(1) {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/endodoncia.jpg");
+    }
+    .servicio-card:nth-child(2) {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/periodoncia.jpg");
+    }
+    .servicio-card:nth-child(3) {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/ortodoncia.jpg");   
+    }
+    .servicio-card:nth-child(4) {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/odontopediatria.jpg");
+    }
+    .servicio-card:nth-child(5) {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/protesis.jpg");
+    }
+    .servicio-card:nth-child(6) {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/familiar.jpg");
     }
 
-.servicio-card:nth-child(1) {
-    background-image: url("assets/img/endodoncia.jpg");
-}
-    
-.servicio-card:nth-child(2) {
-    background-image: url("assets/img/periodoncia.jpg");
-}
-    
-.servicio-card:nth-child(3) {
-    background-image: url("assets/img/ortodoncia.jpg");   
-}
-    
-.servicio-card:nth-child(4) {
-    background-image: url("assets/img/odontotopediatria.jpg");
+    /* Evitamos que el hover tape la foto con un color sólido */
+    .servicio-card:hover {
+        transform: translateY(-10px);
+        background-color: transparent; 
+    }
 }
 
-.servicio-card:nth-child(5) {
-    background-image: url("assets/img/protesis.jpg");
+.info-extra {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-top: 15px;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro traslúcido para la descripción */
+    padding: 0px; 
+    border-radius: 5px;
 }
 
-.servicio-card:nth-child(6) {
-    background-image: url("assets/img/familiar.jpg");
+.servicio-card:hover .info-extra {
+    max-height: 500px;
+    opacity: 1;
+    padding: 10px;
+}
+
+.servicio-card:hover h4 {
+    color: #ffffff !important; /* Mantiene el blanco al pasar el mouse */
 }
 
 
-    
+#nosotros {
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.subtitle {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.nosotros-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Para que en celulares se pongan uno debajo de otro */
+}
+
+.nosotros-item {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nosotros-item h3 {
+    color: #00bfa5; 
+    margin-bottom: 15px;
+}
