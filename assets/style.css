@@ -126,7 +126,8 @@ section {
 }
 
 
-.info-extra {
+
+.profesional-card .info-extra {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
@@ -144,21 +145,84 @@ section {
     transform: translateY(-10px);
 }
 
-
-.servicio-card:hover {
-    background: var(--color-principal);
-    color: var(--blanco);
-    transform: translateY(-10px);
-}
-
-.profesional-card:hover h3, .servicio-card:hover h4 {
+.profesional-card:hover h3 {
     color: var(--blanco);
 }
 
-.profesional-card:hover .info-extra, .servicio-card:hover .info-extra {
+.profesional-card:hover .info-extra {
     max-height: 500px;
     opacity: 1;
 }
+
+
+.servicio-card {
+    height: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.4s ease;
+    border-bottom: 5px solid var(--color-celeste);
+}
+
+
+.servicio-card:nth-child(1) { background-image: url("fotos/endodoncia.png"); }
+.servicio-card:nth-child(2) { background-image: url("fotos/periodoncia.png"); }
+.servicio-card:nth-child(3) { background-image: url("fotos/ortodoncia.png"); }
+.servicio-card:nth-child(4) { background-image: url("fotos/odontopediatria.png"); }
+.servicio-card:nth-child(5) { background-image: url("fotos/protesis.png"); }
+.servicio-card:nth-child(6) { background-image: url("fotos/familiar.png"); }
+
+
+.servicio-card h4 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 2;
+    transition: 0.3s;
+
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+
+
+.servicio-card .info-extra {
+    position: absolute;
+    inset: 0;
+    background: var(--color-celeste);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    transition: 0.4s ease;
+}
+
+
+.servicio-card:hover {
+    transform: translateY(-10px);
+}
+
+.servicio-card:hover h4 {
+    opacity: 0;
+}
+
+.servicio-card:hover .info-extra {
+    opacity: 1;
+}
+
+
 
 .llamar {
     background-color: var(--color-principal);
@@ -203,7 +267,6 @@ footer {
         box-shadow: 0 10px 10px rgba(0,0,0,0.1);
     }
 
-
     .hamburger {
         display: flex;
         flex-direction: column;
@@ -227,7 +290,7 @@ footer {
         transform: rotate(45deg) translate(5px, 5px);
     }
     #menu-toggle:checked ~ .hamburger span:nth-child(2) {
-        opacity: 0; /* Desaparece la del medio */
+        opacity: 0;
     }
     #menu-toggle:checked ~ .hamburger span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
@@ -236,94 +299,6 @@ footer {
     .hero-container h2 {
         font-size: 2rem;
     }
-}
-
-.servicio-card {
-    height: 300px; /* Altura fija para que todas se vean iguales */
-    padding: 20px;
-    border-radius: 10px;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white; /* Texto blanco para resaltar */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-bottom: 5px solid var(--color-principal);
-}
-
-.servicio-card h4 {
-    color: #ffffff !important; /* Blanco puro */
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* Sombra negra para despegarlo del fondo */
-    z-index: 2;
-    transition: 0.3s;
-}
-
-/* 1. Definir primero las imágenes para todos los dispositivos */
-.servicio-card:nth-child(1) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/endodoncia.jpg"); }
-.servicio-card:nth-child(2) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/periodoncia.jpg"); }
-.servicio-card:nth-child(3) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/ortodoncia.jpg"); }
-.servicio-card:nth-child(4) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/odontopediatria.jpg"); }
-.servicio-card:nth-child(5) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/protesis.jpg"); }
-.servicio-card:nth-child(6) { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/familiar.jpg"); }
-
-@media (min-width: 769px) {
-    .servicio-card:nth-child(1) {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/endodoncia.jpg");
-    }
-    .servicio-card:nth-child(2) {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/periodoncia.jpg");
-    }
-    .servicio-card:nth-child(3) {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/ortodoncia.jpg");   
-    }
-    .servicio-card:nth-child(4) {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/odontopediatria.jpg");
-    }
-    .servicio-card:nth-child(5) {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/protesis.jpg");
-    }
-    .servicio-card:nth-child(6) {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("fotos/familiar.jpg");
-    }
-
-    /* Evitamos que el hover tape la foto con un color sólido */
-    .servicio-card:hover {
-        transform: translateY(-10px);
-        background-color: transparent; 
-    }
-}
-
-.info-extra {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.5s ease;
-    font-size: 0.95rem;
-    text-align: center;
-    margin-top: 15px;
-    z-index: 2;
-    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro traslúcido para la descripción */
-    padding: 0px; 
-    border-radius: 5px;
-}
-
-.servicio-card:hover .info-extra {
-    max-height: 500px;
-    opacity: 1;
-    padding: 10px;
-}
-
-.servicio-card:hover h4 {
-    color: #ffffff !important; /* Mantiene el blanco al pasar el mouse */
 }
 
 
@@ -344,7 +319,7 @@ footer {
     display: flex;
     gap: 20px;
     justify-content: space-between;
-    flex-wrap: wrap; /* Para que en celulares se pongan uno debajo de otro */
+    flex-wrap: wrap;
 }
 
 .nosotros-item {
@@ -359,4 +334,27 @@ footer {
 .nosotros-item h3 {
     color: #00bfa5; 
     margin-bottom: 15px;
+}
+
+
+.profesional-img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+    z-index: 2;
+}
+
+.profesional-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--color-principal);
+    display: block;
+}
+
+
+.profesional-card:hover .profesional-img img {
+    transform: scale(1.05);
+    transition: 0.3s;
 }
