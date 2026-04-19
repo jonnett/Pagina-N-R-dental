@@ -4,6 +4,10 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.logo img{
+    height: 70px;
+    width: auto;
+}
 
 :root {
     --color-principal: #00bfa5; 
