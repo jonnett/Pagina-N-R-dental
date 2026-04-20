@@ -52,10 +52,30 @@ nav {
 }
 
 .nav-menu a {
+    position: relative;
     text-decoration: none;
     color: var(--color-texto);
     font-weight: 500;
-    transition: 0.3s;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--color-principal);
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--color-principal);
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
 }
 
 .btn-agenda {
@@ -505,4 +525,19 @@ footer {
 
 .dots span.active {
     background: var(--color-principal);
+}
+.whatsapp-btn {
+    background-color: #25D366;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+    background-color: #1ebe5d;
+    transform: translateY(-2px);
 }
