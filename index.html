@@ -6,18 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N&R Dental | Clínica Odontológica Copiapó</title>
     <link rel="icon" href="assets/fotos/icono N&R.png">
-    <style>
-        @media (max-width: 768px) {
-            .dropdown-content {
-                display: none !important;
-                position: static;
-                width: 100%;
-            }
-            .dropdown-content.active-mobile {
-                display: block !important;
-            }
-        }
-    </style>
 </head>
 <body>
 
@@ -69,10 +57,23 @@
 
     <main>
         <section id="inicio">
-            <div class="hero-container">
-                <h2>Los mejores servicios de odontología en los que puede confiar.</h2>
-                <p>Si está buscando un dentista confiable, estamos aquí para ayudarle. Somos conocidos por los mejores tratamientos dentales asequibles e indoloros con citas rápidas y soluciones oportunas.</p>
-                <a href="https://maps.app.goo.gl/Kqrog2s9PJJQTDgy5">Donde encontrarnos</a>
+            <div class="hero-layout">
+                <div class="hero-text">
+                    <h2>Los mejores servicios de odontología en los que puede confiar.</h2>
+                    <p>Si está buscando un dentista confiable, estamos aquí para ayudarle. Somos conocidos por los mejores tratamientos dentales asequibles e indoloros con citas rápidas y soluciones oportunas.</p>
+                    <a href="https://maps.app.goo.gl/Kqrog2s9PJJQTDgy5">Donde encontrarnos</a>
+                </div>
+
+                <div class="hero-novedades">
+                    <h3>Novedades</h3>
+                    <div class="mini-carrusel">
+                        <div class="mini-track">
+                            <img src="assets/fotos/Novedades/1.png">
+                            <img src="assets/fotos/Novedades/2.png">
+                            <img src="assets/fotos/Novedades/3.png">
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -83,62 +84,46 @@
             </div>
 
             <div class="carousel-container">
-                <input type="radio" name="slider" id="s1" checked>
-                <input type="radio" name="slider" id="s2">
-                <input type="radio" name="slider" id="s3">
-                <input type="radio" name="slider" id="s4">
-
-                <div class="nosotros-carousel">
-                    <div class="slide s1">
+                <div class="nosotros-carousel" id="mainCarousel">
+                    <div class="slide active">
                         <img src="assets/fotos/nosotros/1.jpg">
                         <div class="overlay">
                             <p>Somos una clínica dental familiar con más de 10 años de trayectoria cuidando la sonrisa de nuestra comunidad</p>
                         </div>
-                        <div class="arrows">
-                            <label for="s4" class="prev">❮</label>
-                            <label for="s2" class="next">❯</label>
-                        </div>
                     </div>
 
-                    <div class="slide s2">
+                    <div class="slide">
                         <img src="assets/fotos/nosotros/2.jpg">
                         <div class="overlay">
                             <p>En NyR Dental, combinamos la experiencia de especialistas titulados en las mejores universidades del país con la innovación de la odontología digital y biomateriales de alta gama.</p>
                         </div>
-                        <div class="arrows">
-                            <label for="s1" class="prev">❮</label>
-                            <label for="s3" class="next">❯</label>
-                        </div>
                     </div>
 
-                    <div class="slide s3">
+                    <div class="slide">
                         <img src="assets/fotos/nosotros/3.jpeg">
                         <div class="overlay">
                             <p>Creemos que una atención de excelencia no debe perder la calidez. Por eso, aquí no solo encontrarás tecnología de vanguardia, sino también un equipo que te recibe como parte de su propia familia</p>
                         </div>
-                        <div class="arrows">
-                            <label for="s2" class="prev">❮</label>
-                            <label for="s4" class="next">❯</label>
-                        </div>
                     </div>
 
-                    <div class="slide s4">
+                    <div class="slide">
                         <img src="assets/fotos/nosotros/4.jpg">
                         <div class="overlay">
                             <p>Nos caracterizamos por nuestra cercanía, ética profesional y el compromiso de ofrecer siempre un precio justo.</p>
                         </div>
-                        <div class="arrows">
-                            <label for="s3" class="prev">❮</label>
-                            <label for="s1" class="next">❯</label>
-                        </div>
                     </div>
                 </div>
 
-                <div class="dots">
-                    <label for="s1"></label>
-                    <label for="s2"></label>
-                    <label for="s3"></label>
-                    <label for="s4"></label>
+                <div class="arrows">
+                    <div class="prev" id="prevBtn">❮</div>
+                    <div class="next" id="nextBtn">❯</div>
+                </div>
+
+                <div class="dots" id="dotsContainer">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
                 </div>
             </div>
         </section>
@@ -363,34 +348,55 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('#mainCarousel .slide');
+            const dots = document.querySelectorAll('.dot');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            let currentIndex = 0;
+            let autoSlideInterval;
+
+            function showSlide(index) {
+                slides.forEach(s => s.classList.remove('active'));
+                dots.forEach(d => d.classList.remove('active'));
+                currentIndex = (index + slides.length) % slides.length;
+                slides[currentIndex].classList.add('active');
+                dots[currentIndex].classList.add('active');
+            }
+
+            function nextSlide() { showSlide(currentIndex + 1); }
+            function startAutoSlide() { autoSlideInterval = setInterval(nextSlide, 8000); }
+            function resetInterval() { clearInterval(autoSlideInterval); startAutoSlide(); }
+
+            if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
+            if (prevBtn) prevBtn.addEventListener('click', () => { showSlide(currentIndex - 1); resetInterval(); });
+            dots.forEach((dot, idx) => dot.addEventListener('click', () => { showSlide(idx); resetInterval(); }));
+
+            startAutoSlide();
+
             const dropbtn = document.querySelector('.dropbtn');
             const dropdownContent = document.querySelector('.dropdown-content');
             const menuToggle = document.getElementById('menu-toggle');
 
-            // Toggle para móvil (Precios)
             if (dropbtn) {
                 dropbtn.addEventListener('click', (e) => {
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
                         e.stopPropagation();
-                        // Esto añade o quita la clase. El CSS arriba hará el resto.
                         dropdownContent.classList.toggle('active-mobile');
                     }
                 });
             }
 
-            // Cerrar menú hamburguesa al navegar
             const navLinks = document.querySelectorAll('.nav-menu a:not(.dropbtn)');
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (menuToggle) menuToggle.checked = false;
-                    dropdownContent.classList.remove('active-mobile');
+                    if (dropdownContent) dropdownContent.classList.remove('active-mobile');
                 });
             });
 
-            // Si cambias a PC, limpiamos la clase de móvil
             window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
+                if (window.innerWidth > 768 && dropdownContent) {
                     dropdownContent.classList.remove('active-mobile');
                 }
             });
