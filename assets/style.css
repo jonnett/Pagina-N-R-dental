@@ -618,3 +618,97 @@ footer {
         max-width: 100%;
     }
 }
+
+.buscador-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+#buscadorEspecialista {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 2px solid #ddd;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+#buscadorEspecialista:focus {
+    border-color: #00b4d8;
+    box-shadow: 0 0 10px rgba(0,180,216,0.2);
+}
+
+.theme-toggle{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: var(--color-principal);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    z-index: 2000;
+}
+
+.theme-toggle:hover{
+    transform: scale(1.1);
+}
+
+.dark-mode{
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode section{
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode p,
+.dark-mode a{
+    color: white;
+}
+.dark-mode header{
+    background-color: #1e1e1e;
+}
+
+.dark-mode .profesional-card{
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.dark-mode .servicio-card{
+    background-color: #1f1f1f;
+}
+
+.dark-mode .dropdown-content{
+    background-color: #1f1f1f;
+}
+
+.dark-mode footer{
+    background-color: #000;
+}
+
+.dark-mode .duda-banner{
+    background-color: #1a1a1a;
+}
+
+.dark-mode #buscadorEspecialista{
+    background-color: #1f1f1f;
+    color: white;
+    border: 2px solid #333;
+}
+
+.dark-mode .nav-menu{
+    background-color: #1e1e1e;
+}

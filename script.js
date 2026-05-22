@@ -77,3 +77,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+const buscador = document.getElementById('buscadorEspecialista');
+const especialistas = document.querySelectorAll('.profesional-card');
+const mensaje = document.getElementById('mensajeNoEncontrado');
+
+if (buscador) {
+    buscador.addEventListener('input', () => {
+        const texto = buscador.value.toLowerCase();
+        let encontrados = 0;
+        especialistas.forEach(card => {
+            const especialidad = card.dataset.especialidad.toLowerCase();
+            if (especialidad.includes(texto)) {
+                card.style.display = 'block';
+                encontrados++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (encontrados === 0) {
+            mensaje.style.display = 'block';
+        } else {
+            mensaje.style.display = 'none';
+        }
+    });
+}
+
+    const themeToggle = document.getElementById("themeToggle");
+console.log(themeToggle);
+themeToggle.addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        themeToggle.innerHTML = "☀️";
+    } else {
+        themeToggle.innerHTML = "🌙";
+    }
+});
+
+
