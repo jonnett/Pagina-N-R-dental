@@ -15,12 +15,11 @@
                 <img src="assets/fotos/logo.png" alt="N&R Dental">
             </div>
 
-            <input type="checkbox" id="menu-toggle" style="display:none;">
-            <label for="menu-toggle" class="hamburger">
+            <div class="hamburger" id="hamburger-btn">
                 <span></span>
                 <span></span>
                 <span></span>
-            </label>
+            </div>
 
             <ul class="nav-menu">
                 <li><a href="#inicio">Inicio</a></li>
@@ -346,79 +345,6 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // CARRUSEL (Original)
-            const slides = document.querySelectorAll('#mainCarousel .slide');
-            const dots = document.querySelectorAll('.dot');
-            const nextBtn = document.getElementById('nextBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            let currentIndex = 0;
-            let autoSlideInterval;
-
-            function showSlide(index) {
-                slides.forEach(s => s.classList.remove('active'));
-                dots.forEach(d => d.classList.remove('active'));
-                currentIndex = (index + slides.length) % slides.length;
-                slides[currentIndex].classList.add('active');
-                dots[currentIndex].classList.add('active');
-            }
-
-            function nextSlide() { showSlide(currentIndex + 1); }
-            function startAutoSlide() { autoSlideInterval = setInterval(nextSlide, 8000); }
-            function resetInterval() { clearInterval(autoSlideInterval); startAutoSlide(); }
-
-            if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
-            if (prevBtn) prevBtn.addEventListener('click', () => { showSlide(currentIndex - 1); resetInterval(); });
-            dots.forEach((dot, idx) => dot.addEventListener('click', () => { showSlide(idx); resetInterval(); }));
-            startAutoSlide();
-
-            // MENÚ MÓVIL Y DROPDOWN (Lógica blindada)
-            const dropbtn = document.querySelector('.dropbtn');
-            const dropdown = document.querySelector('.dropdown');
-            const dropdownContent = document.querySelector('.dropdown-content');
-            const menuToggle = document.getElementById('menu-toggle');
-
-            if (dropbtn) {
-                dropbtn.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        // Alternamos una clase en el PADRE para tener más control
-                        const isOpen = dropdown.classList.contains('is-open');
-                        
-                        if (isOpen) {
-                            dropdown.classList.remove('is-open');
-                        } else {
-                            dropdown.classList.add('is-open');
-                        }
-                    }
-                });
-            }
-
-            // Cerrar menú al hacer clic en cualquier link (que no sea el de Precios)
-            const allLinks = document.querySelectorAll('.nav-menu a:not(.dropbtn)');
-            allLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (menuToggle) menuToggle.checked = false;
-                    dropdown.classList.remove('is-open');
-                });
-            });
-
-            // Cerrar si se hace clic fuera del menú
-            document.addEventListener('click', (e) => {
-                if (!dropdown.contains(e.target) && dropdown.classList.contains('is-open')) {
-                    dropdown.classList.remove('is-open');
-                }
-            });
-
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    dropdown.classList.remove('is-open');
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
