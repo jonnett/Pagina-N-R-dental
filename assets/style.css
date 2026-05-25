@@ -712,3 +712,42 @@ footer {
 .dark-mode .nav-menu{
     background-color: #1e1e1e;
 }
+
+.boton-arriba{
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-celeste);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 2000;
+}
+
+.boton-arriba.show{
+    opacity: 1;
+    visibility: visible;
+}
+
+.boton-arriba:hover{
+    transform: scale(1.1);
+}
+
+.fade-in{
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible{
+    opacity: 1;
+    transform: translateY(0);
+}

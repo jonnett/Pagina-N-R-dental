@@ -116,5 +116,37 @@ themeToggle.addEventListener("click", function () {
     }
 });
 
+const botonArriba = document.getElementById("botonArriba");
+window.addEventListener("scroll", () => {
+    if(window.scrollY > 300){
+        botonArriba.classList.add("show");
+    } else {
+        botonArriba.classList.remove("show");
+    }
+});
+
+botonArriba.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+const faders = document.querySelectorAll('.fade-in');
+const aparecer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        } else {
+            entry.target.classList.remove('visible');
+        }
+
+    });
+});
+
+faders.forEach(fader => {
+    aparecer.observe(fader);
+});
 
 
