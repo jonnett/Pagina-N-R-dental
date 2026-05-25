@@ -176,99 +176,101 @@
         </section>
 
         <section id="especialistas">
-    <h2>Nuestros Especialistas</h2>
+            <h2>Nuestros Especialistas</h2>
 
-    <div class="buscador-container">
-        <input
-            type="text"
-            id="buscadorEspecialista"
-            placeholder="Busca un especialista o tratamiento..."
-        >
-        <p id="mensajeNoEncontrado" style="display:none;">
-        No encontramos especialistas relacionados
-        </p>
-    </div>
+            <div class="buscador-container">
+                <input type="text" id="buscadorEspecialista" placeholder="Busca un especialista o tratamiento...">
+                <p id="mensajeNoEncontrado" style="display:none;">No encontramos especialistas relacionados</p>
+            </div>
 
-    <div class="profesionales-container">
-        <div class="profesional-card fade-in" data-especialidad="diagnostico patologia mucosa oral huesos maxilares cirujano dentista">
-            <div class="profesional-img">
-                <img src="assets/fotos/especialistas/elba.png">
+            <div class="filtros-container">
+                <button class="btn-filtro active" data-filtro="todos">Todos</button>
+                <button class="btn-filtro" data-filtro="general">General / Familiar</button>
+                <button class="btn-filtro" data-filtro="endodoncia">Endodoncia</button>
+                <button class="btn-filtro" data-filtro="ortodoncia">Ortodoncia</button>
+                <button class="btn-filtro" data-filtro="odontopediatria">Odontopediatría</button>
+                <button class="btn-filtro" data-filtro="implantologia">Periodoncia e Implantes</button>
             </div>
-            <h3>Dra. Elba Rivera Del Portillo</h3>
-            <div class="info-extra">
-                <p>Cirujano dentista Universidad de Valparaíso año 2014.</p>
-                <p>Diplomado en diagnóstico de patología de los huesos maxilares. Universidad Católica año 2024.</p>
-                <p>Diplomado de actualización en diagnóstico y tratamiento de patología de la mucosa oral. Universidad Católica año 2023.</p>
-            </div>
-        </div>
 
-        <div class="profesional-card fade-in" data-especialidad="endodoncia conducto dolor infeccion">
-            <div class="profesional-img">
-                <img src="assets/fotos/especialistas/luis.png">
-            </div>
-            <h3>Dr. Luis Nehme Sancho</h3>
-            <div class="info-extra">
-                <p>Cirujano Dentista Universidad de Valparaíso año 2014.</p>
-                <p>Especialidad de endodoncia U. De Chile año 2021.</p>
-            </div>
-        </div>
+            <div class="profesionales-container">
+                <div class="profesional-card fade-in" data-especialidad="diagnostico patologia mucosa oral huesos maxilares cirujano dentista general">
+                    <div class="profesional-img">
+                        <img src="assets/fotos/especialistas/elba.png">
+                    </div>
+                    <h3>Dra. Elba Rivera Del Portillo</h3>
+                    <div class="info-extra">
+                        <p>Cirujano dentista Universidad de Valparaíso año 2014.</p>
+                        <p>Diplomado en diagnóstico de patología de los huesos maxilares. Universidad Católica año 2024.</p>
+                        <p>Diplomado de actualización en diagnóstico y tratamiento de patología de la mucosa oral. Universidad Católica año 2023.</p>
+                    </div>
+                </div>
 
-        <div class="profesional-card fade-in" data-especialidad="ortodoncia brackets dientes alineacion">
-            <div class="profesional-img">
-                <img src="assets/fotos/especialistas/manuel.png">
-            </div>
-            <h3>Dr. Manuel Manríquez</h3>
-            <div class="info-extra">
-                <p>Cirujano dentista Universidad de Valparaíso año 2018.</p>
-                <p>Especialista en Ortodoncia y Ortopedia Dento Maxilo Facial, Universidad de Valparaíso (c).</p>
-                <p>Diplomado en Crecimiento y Desarrollo Craneofacial Aplicado a la Ortodoncia Interceptiva, Pontificia Universidad Católica de Chile.</p>
-            </div>
-        </div>
+                <div class="profesional-card fade-in" data-especialidad="endodoncia conducto dolor infeccion">
+                    <div class="profesional-img">
+                        <img src="assets/fotos/especialistas/luis.png">
+                    </div>
+                    <h3>Dr. Luis Nehme Sancho</h3>
+                    <div class="info-extra">
+                        <p>Cirujano Dentista Universidad de Valparaíso año 2014.</p>
+                        <p>Especialidad de endodoncia U. De Chile año 2021.</p>
+                    </div>
+                </div>
 
-        <div class="profesional-card fade-in" data-especialidad="niños odontopediatria infantil">
-            <div class="profesional-img">
-                <img src="assets/fotos/especialistas/shigrid.png">
-            </div>
-            <h3>Dra. Shigrid Parra Mella</h3>
-            <div class="info-extra">
-                <p>Cirujano dentista Universidad de Concepción año 2019.</p>
-                <p>Especialista en Odontopediatría Universidad Andrés Bello año 2024.</p>
-            </div>
-        </div>
+                <div class="profesional-card fade-in" data-especialidad="ortodoncia brackets dientes alineacion">
+                    <div class="profesional-img">
+                        <img src="assets/fotos/especialistas/manuel.png">
+                    </div>
+                    <h3>Dr. Manuel Manríquez</h3>
+                    <div class="info-extra">
+                        <p>Cirujano dentista Universidad de Valparaíso año 2018.</p>
+                        <p>Especialiste en Ortodoncia y Ortopedia Dento Maxilo Facial, Universidad de Valparaíso (c).</p>
+                        <p>Diplomado en Crecimiento y Desarrollo Craneofacial Aplicado a la Ortodoncia Interceptiva, Pontificia Universidad Católica de Chile.</p>
+                    </div>
+                </div>
 
-        <div class="profesional-card fade-in" data-especialidad="implantologia implantes encias periodoncia">
-            <div class="profesional-img">
-                <img src="assets/fotos/especialistas/daniel.png">
-            </div>
-            <h3>Dr. Daniel Dalmazzo Contreras</h3>
-            <div class="info-extra">
-                <p>Cirujano Dentista Universidad Mayor, año 2005.</p>
-                <p>Especialista en Periodoncia e implantología, Universidad Mayor, año 2010.</p>
-            </div>
-        </div>
+                <div class="profesional-card fade-in" data-especialidad="niños odontopediatria infantil general">
+                    <div class="profesional-img">
+                        <img src="assets/fotos/especialistas/shigrid.png">
+                    </div>
+                    <h3>Dra. Shigrid Parra Mella</h3>
+                    <div class="info-extra">
+                        <p>Cirujano dentista Universidad de Concepción año 2019.</p>
+                        <p>Especialista en Odontopediatría Universidad Andrés Bello año 2024.</p>
+                    </div>
+                </div>
 
-        <div class="profesional-card fade-in" data-especialidad="odontologia familiar limpieza caries restauracion dentista">
-            <div class="profesional-img">
-                <img src="assets/fotos/especialistas/camilo.png">
-            </div>
-            <h3>Dr. Camilo Quispe</h3>
-            <div class="info-extra">
-                <p>Cirujano Dentista Universidad de Valparaíso año 2015.</p>
-            </div>
-        </div>
+                <div class="profesional-card fade-in" data-especialidad="implantologia implantes encias periodoncia">
+                    <div class="profesional-img">
+                        <img src="assets/fotos/especialistas/daniel.png">
+                    </div>
+                    <h3>Dr. Daniel Dalmazzo Contreras</h3>
+                    <div class="info-extra">
+                        <p>Cirujano Dentista Universidad Mayor, año 2005.</p>
+                        <p>Especialista en Periodoncia e implantología, Universidad Mayor, año 2010.</p>
+                    </div>
+                </div>
 
-        <div class="profesional-card fade-in" data-especialidad="odontologia general limpieza caries restauracion evaluacion dentista">
-                <div class="profesional-img">
-                    <img src="assets/fotos/especialistas/nicolas.png">
+                <div class="profesional-card fade-in" data-especialidad="odontologia familiar limpieza caries restauracion dentista general">
+                    <div class="profesional-img">
+                        <img src="assets/fotos/especialistas/camilo.png">
+                    </div>
+                    <h3>Dr. Camilo Quispe</h3>
+                    <div class="info-extra">
+                        <p>Cirujano Dentista Universidad de Valparaíso año 2015.</p>
+                    </div>
+                </div>
+
+                <div class="profesional-card fade-in" data-especialidad="odontologia general limpieza caries restauracion evaluacion dentista general">
+                    <div class="profesional-img">
+                        <img src="assets/fotos/especialistas/nicolas.png">
                     </div>
                     <h3>Dr. Nicolas Coria Labarca</h3>
                     <div class="info-extra">
-                    <p>Cirujano Dentista Universidad de Antofagasta año 2018.</p>
+                        <p>Cirujano Dentista Universidad de Antofagasta año 2018.</p>
+                    </div>
                 </div>
             </div>
-
-        </div>
-</section>
+        </section>
 
         <section class="duda-banner">
             <h2>¿No estás seguro de lo que necesitas?</h2>
@@ -355,7 +357,7 @@
         </section>
     </main>
 
-     <footer>
+    <footer>
         <div class="footer-grid">
             <div class="footer-info">
                 <h4>N&R Dental</h4>
@@ -379,10 +381,10 @@
         🌙
     </button>
 
-<button id="botonArriba" class="boton-arriba">
-    ↑
-</button>
+    <button id="botonArriba" class="boton-arriba">
+        ↑
+    </button>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
