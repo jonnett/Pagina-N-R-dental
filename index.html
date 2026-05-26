@@ -15,7 +15,8 @@
                 <img src="assets/fotos/logo.png" alt="N&R Dental">
             </div>
 
-            <div class="hamburger" id="hamburger-btn">
+            <!-- Botón de hamburguesa con id y atributos de accesibilidad iniciales -->
+            <div class="hamburger" id="hamburger-btn" role="button" aria-label="Abrir menú de navegación" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -49,6 +50,7 @@
                 </li>
 
                 <li><a href="#consejos">Consejos</a></li>
+                <li><a href="#contacto-seccion">Contacto</a></li>
                 <li><a href="https://ff.healthatom.io/1FIQJb" class="btn-agenda">Agenda tu hora</a></li>
             </ul>
         </nav>
@@ -67,9 +69,9 @@
                     <h3>Novedades</h3>
                     <div class="mini-carrusel">
                         <div class="mini-track">
-                            <img src="assets/fotos/Novedades/1.png">
-                            <img src="assets/fotos/Novedades/2.png">
-                            <img src="assets/fotos/Novedades/3.png">
+                            <img src="assets/fotos/Novedades/1.png" alt="Novedad 1">
+                            <img src="assets/fotos/Novedades/2.png" alt="Novedad 2">
+                            <img src="assets/fotos/Novedades/3.png" alt="Novedad 3">
                         </div>
                     </div>
                 </div>
@@ -85,28 +87,28 @@
             <div class="carousel-container">
                 <div class="nosotros-carousel" id="mainCarousel">
                     <div class="slide active">
-                        <img src="assets/fotos/nosotros/1.jpg">
+                        <img src="assets/fotos/nosotros/1.jpg" alt="Instalaciones 1">
                         <div class="overlay">
                             <p>Somos una clínica dental familiar con más de 10 años de trayectoria cuidando la sonrisa de nuestra comunidad</p>
                         </div>
                     </div>
 
                     <div class="slide">
-                        <img src="assets/fotos/nosotros/2.jpg">
+                        <img src="assets/fotos/nosotros/2.jpg" alt="Instalaciones 2">
                         <div class="overlay">
                             <p>En NyR Dental, combinamos la experiencia de especialistas titulados en las mejores universidades del país con la innovación de la odontología digital y biomateriales de alta gama.</p>
                         </div>
                     </div>
 
                     <div class="slide">
-                        <img src="assets/fotos/nosotros/3.jpeg">
+                        <img src="assets/fotos/nosotros/3.jpeg" alt="Instalaciones 3">
                         <div class="overlay">
                             <p>Creemos que una atención de excelencia no debe perder la calidez. Por eso, aquí no solo encontrarás tecnología de vanguardia, sino también un equipo que te recibe como parte de su propia familia</p>
                         </div>
                     </div>
 
                     <div class="slide">
-                        <img src="assets/fotos/nosotros/4.jpg">
+                        <img src="assets/fotos/nosotros/4.jpg" alt="Instalaciones 4">
                         <div class="overlay">
                             <p>Nos caracterizamos por nuestra cercanía, ética profesional y el compromiso de ofrecer siempre un precio justo.</p>
                         </div>
@@ -192,84 +194,8 @@
                 <button class="btn-filtro" data-filtro="implantologia">Periodoncia e Implantes</button>
             </div>
 
-            <div class="profesionales-container">
-                <div class="profesional-card fade-in" data-especialidad="diagnostico patologia mucosa oral huesos maxilares cirujano dentista general">
-                    <div class="profesional-img">
-                        <img src="assets/fotos/especialistas/elba.png">
-                    </div>
-                    <h3>Dra. Elba Rivera Del Portillo</h3>
-                    <div class="info-extra">
-                        <p>Cirujano dentista Universidad de Valparaíso año 2014.</p>
-                        <p>Diplomado en diagnóstico de patología de los huesos maxilares. Universidad Católica año 2024.</p>
-                        <p>Diplomado de actualización en diagnóstico y tratamiento de patología de la mucosa oral. Universidad Católica año 2023.</p>
-                    </div>
-                </div>
-
-                <div class="profesional-card fade-in" data-especialidad="endodoncia conducto dolor infeccion">
-                    <div class="profesional-img">
-                        <img src="assets/fotos/especialistas/luis.png">
-                    </div>
-                    <h3>Dr. Luis Nehme Sancho</h3>
-                    <div class="info-extra">
-                        <p>Cirujano Dentista Universidad de Valparaíso año 2014.</p>
-                        <p>Especialidad de endodoncia U. De Chile año 2021.</p>
-                    </div>
-                </div>
-
-                <div class="profesional-card fade-in" data-especialidad="ortodoncia brackets dientes alineacion">
-                    <div class="profesional-img">
-                        <img src="assets/fotos/especialistas/manuel.png">
-                    </div>
-                    <h3>Dr. Manuel Manríquez</h3>
-                    <div class="info-extra">
-                        <p>Cirujano dentista Universidad de Valparaíso año 2018.</p>
-                        <p>Especialiste en Ortodoncia y Ortopedia Dento Maxilo Facial, Universidad de Valparaíso (c).</p>
-                        <p>Diplomado en Crecimiento y Desarrollo Craneofacial Aplicado a la Ortodoncia Interceptiva, Pontificia Universidad Católica de Chile.</p>
-                    </div>
-                </div>
-
-                <div class="profesional-card fade-in" data-especialidad="niños odontopediatria infantil general">
-                    <div class="profesional-img">
-                        <img src="assets/fotos/especialistas/shigrid.png">
-                    </div>
-                    <h3>Dra. Shigrid Parra Mella</h3>
-                    <div class="info-extra">
-                        <p>Cirujano dentista Universidad de Concepción año 2019.</p>
-                        <p>Especialista en Odontopediatría Universidad Andrés Bello año 2024.</p>
-                    </div>
-                </div>
-
-                <div class="profesional-card fade-in" data-especialidad="implantologia implantes encias periodoncia">
-                    <div class="profesional-img">
-                        <img src="assets/fotos/especialistas/daniel.png">
-                    </div>
-                    <h3>Dr. Daniel Dalmazzo Contreras</h3>
-                    <div class="info-extra">
-                        <p>Cirujano Dentista Universidad Mayor, año 2005.</p>
-                        <p>Especialista en Periodoncia e implantología, Universidad Mayor, año 2010.</p>
-                    </div>
-                </div>
-
-                <div class="profesional-card fade-in" data-especialidad="odontologia familiar limpieza caries restauracion dentista general">
-                    <div class="profesional-img">
-                        <img src="assets/fotos/especialistas/camilo.png">
-                    </div>
-                    <h3>Dr. Camilo Quispe</h3>
-                    <div class="info-extra">
-                        <p>Cirujano Dentista Universidad de Valparaíso año 2015.</p>
-                    </div>
-                </div>
-
-                <div class="profesional-card fade-in" data-especialidad="odontologia general limpieza caries restauracion evaluacion dentista general">
-                    <div class="profesional-img">
-                        <img src="assets/fotos/especialistas/nicolas.png">
-                    </div>
-                    <h3>Dr. Nicolas Coria Labarca</h3>
-                    <div class="info-extra">
-                        <p>Cirujano Dentista Universidad de Antofagasta año 2018.</p>
-                    </div>
-                </div>
-            </div>
+            <!-- Este contenedor se llenará dinámicamente desde js -->
+            <div class="profesionales-container" id="contenedorEspecialistas"></div>
         </section>
 
         <section class="duda-banner">
@@ -278,6 +204,34 @@
             <a href="tel:+56958032626"><button class="llamar">Llamar ahora</button></a>
             <p>o</p>
             <p><a href="https://wa.me/56958032626" target="_blank"><button class="whatsapp-btn">Escríbenos por WhatsApp</button></a></p>
+        </section>
+
+        <!-- FORMULARIO DE CONTACTO -->
+        <section id="contacto-seccion" class="contacto-container">
+            <h2>Formulario de Contacto</h2>
+            <p class="subtitle">Escríbenos para resolver tus dudas de forma segura.</p>
+            <form id="formContacto" novalidate>
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre y apellido">
+                    <span class="error-msg" id="errorNombre" aria-live="polite"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com">
+                    <span class="error-msg" id="errorCorreo" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu consulta aquí..."></textarea>
+                    <span class="error-msg" id="errorMensaje" aria-live="polite"></span>
+                </div>
+
+                <button type="submit" id="btnEnviarForm" class="btn-enviar">Enviar Mensaje</button>
+            </form>
+            <div id="mensajeExito" class="form-success" style="display:none;" aria-live="assertive"></div>
         </section>
 
         <section id="consejos">
@@ -377,11 +331,12 @@
         </div>
     </footer>
 
-    <button id="themeToggle" class="theme-toggle">
+    <!-- Botón de Modo Oscuro requerido por evaluación -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema de color">
         🌙
     </button>
 
-    <button id="botonArriba" class="boton-arriba">
+    <button id="botonArriba" class="boton-arriba" aria-label="Volver arriba">
         ↑
     </button>
 

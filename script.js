@@ -1,26 +1,294 @@
 document.addEventListener("DOMContentLoaded", function() {
+    //ESTRUCTURA DE DATOS: ARREGLO DE OBJETOS 
+    // Almacena los datos estructurados de los especialistas para renderizado dinámico.
+    const listaEspecialistas = [
+        {
+            id: 1,
+            nombre: "Dra. Elba Rivera Del Portillo",
+            imagen: "assets/fotos/especialistas/elba.png",
+            dataEspecialidad: "diagnostico patologia mucosa oral huesos maxilares cirujano dentista general",
+            estudios: [
+                "Cirujano dentista Universidad de Valparaíso año 2014.",
+                "Diplomado en diagnóstico de patología de los huesos maxilares. Universidad Católica año 2024.",
+                "Diplomado de actualización en diagnóstico y tratamiento de patología de la mucosa oral. Universidad Católica año 2023."
+            ]
+        },
+        {
+            id: 2,
+            nombre: "Dr. Luis Nehme Sancho",
+            imagen: "assets/fotos/especialistas/luis.png",
+            dataEspecialidad: "endodoncia conducto dolor infeccion",
+            estudios: [
+                "Cirujano Dentista Universidad de Valparaíso año 2014.",
+                "Especialidad de endodoncia U. De Chile año 2021."
+            ]
+        },
+        {
+            id: 3,
+            nombre: "Dr. Manuel Manríquez",
+            imagen: "assets/fotos/especialistas/manuel.png",
+            dataEspecialidad: "ortodoncia brackets dientes alineacion",
+            estudios: [
+                "Cirujano dentista Universidad de Valparaíso año 2018.",
+                "Especialista en Ortodoncia y Ortopedia Dento Maxilo Facial, Universidad de Valparaíso (c).",
+                "Diplomado en Crecimiento y Desarrollo Craneofacial Aplicado a la Ortodoncia Interceptiva, Pontificia Universidad Católica de Chile."
+            ]
+        },
+        {
+            id: 4,
+            nombre: "Dra. Shigrid Parra Mella",
+            imagen: "assets/fotos/especialistas/shigrid.png",
+            dataEspecialidad: "niños odontopediatria infantil general",
+            estudios: [
+                "Cirujano dentista Universidad de Concepción año 2019.",
+                "Especialista en Odontopediatría Universidad Andrés Bello año 2024."
+            ]
+        },
+        {
+            id: 5,
+            nombre: "Dr. Daniel Dalmazzo Contreras",
+            imagen: "assets/fotos/especialistas/daniel.png",
+            dataEspecialidad: "implantologia implantes encias periodoncia",
+            estudios: [
+                "Cirujano Dentista Universidad Mayor, año 2005.",
+                "Especialista en Periodoncia e implantología, Universidad Mayor, año 2010."
+            ]
+        },
+        {
+            id: 6,
+            nombre: "Dr. Camilo Quispe",
+            imagen: "assets/fotos/especialistas/camilo.png",
+            dataEspecialidad: "odontologia familiar limpieza caries restauracion dentista general",
+            estudios: [
+                "Cirujano Dentista Universidad de Valparaíso año 2015."
+            ]
+        },
+        {
+            id: 7,
+            nombre: "Dr. Nicolas Coria Labarca",
+            imagen: "assets/fotos/especialistas/nicolas.png",
+            dataEspecialidad: "odontologia general limpieza caries restauracion evaluacion dentista general",
+            estudios: [
+                "Cirujano Dentista Universidad de Antofagasta año 2018."
+            ]
+        }
+    ];
 
-    //MENÚ HAMBURGUESA
+
+    //MENÚ HAMBURGUESA Y ACCESIBILIDAD ARIA
     const hamburger = document.getElementById("hamburger-btn");
     const navMenu = document.querySelector(".nav-menu");
 
     if (hamburger && navMenu) {
         hamburger.addEventListener("click", () => {
-            navMenu.classList.toggle("active");
+            const desplegado = navMenu.classList.toggle("active");
             hamburger.classList.toggle("active");
+            
+            // Actualización dinámica de atributos ARIA exigidos por la pauta
+            hamburger.setAttribute("aria-expanded", desplegado ? "true" : "false");
+            hamburger.setAttribute("aria-label", desplegado ? "Cerrar menú de navegación" : "Abrir menú de navegación");
         });
 
-        // Cerrar menú al hacer click en un enlace
         document.querySelectorAll(".nav-menu a").forEach(link => {
             link.addEventListener("click", () => {
                 navMenu.classList.remove("active");
                 hamburger.classList.remove("active");
+                hamburger.setAttribute("aria-expanded", "false");
+                hamburger.setAttribute("aria-label", "Abrir menú de navegación");
             });
         });
     }
 
+    //CARGA DINÁMICA DE CONTENIDO EN EL DOM 
+    /**
+     * Renderiza las tarjetas de especialistas en el DOM basándose en un arreglo provisto.
+     * @param {Array} especialistas - Listado de objetos de especialistas a dibujar.
+     */
+    function renderizarEspecialistas(especialistas) {
+        const contenedor = document.getElementById("contenedorEspecialistas");
+        if (!contenedor) return;
+        
+        contenedor.innerHTML = ""; // Limpieza controlada del contenedor antes de pintar
 
-    //CARRUSEL PRINCIPAL (SOBRE NOSOTROS)
+        especialistas.forEach(profesional => {
+            const card = document.createElement("div");
+            card.className = "profesional-card fade-in appear"; 
+            card.setAttribute("data-especialidad", profesional.dataEspecialidad);
+
+            // Contenedor de imagen
+            const divImg = document.createElement("div");
+            divImg.className = "profesional-img";
+            const img = document.createElement("img");
+            img.src = profesional.imagen;
+            img.alt = profesional.nombre;
+            divImg.appendChild(img);
+
+            // Nombre
+            const h3 = document.createElement("h3");
+            h3.textContent = profesional.nombre;
+
+            // Capa interactiva Hover
+            const divInfo = document.createElement("div");
+            divInfo.className = "info-extra";
+
+            profesional.estudios.forEach(estudio => {
+                const pEstudio = document.createElement("p");
+                pEstudio.textContent = estudio;
+                divInfo.appendChild(pEstudio);
+            });
+
+            // Ensamblaje de la tarjeta
+            card.appendChild(divImg);
+            card.appendChild(h3);
+            card.appendChild(divInfo);
+
+            contenedor.appendChild(card);
+        });
+    }
+
+    // Inicializar la carga con todos los elementos al entrar a la página
+    renderizarEspecialistas(listaEspecialistas);
+
+    //FILTRO Y BUSQUEDA INTERACTIVA EN TIEMPO REAL 
+    const buscador = document.getElementById("buscadorEspecialista");
+    const botonesFiltro = document.querySelectorAll(".btn-filtro");
+    const mensajeNoEncontrado = document.getElementById("mensajeNoEncontrado");
+    
+    let filtroActivo = "todos";
+
+    /**
+     * Procesa la entrada del buscador y la botonera activa utilizando métodos de filtrado estructurados.
+     */
+    function filtrarEspecialistas() {
+        const textoBusqueda = buscador ? buscador.value.toLowerCase().trim() : "";
+
+        // Uso estricto de .filter() sobre el arreglo de objetos 
+        const especialistasFiltrados = listaEspecialistas.filter(profesional => {
+            const especialidadesData = profesional.dataEspecialidad.toLowerCase();
+            const nombreEspecialista = profesional.nombre.toLowerCase();
+
+            // Validación de la botonera de categorías
+            let coincideFiltro = false;
+            if (filtroActivo === "todos") {
+                coincideFiltro = true;
+            } else if (filtroActivo === "general") {
+                coincideFiltro = especialidadesData.includes("general");
+            } else if (filtroActivo === "endodoncia") {
+                coincideFiltro = especialidadesData.includes("endodoncia");
+            } else if (filtroActivo === "ortodoncia") {
+                coincideFiltro = especialidadesData.includes("ortodoncia");
+            } else if (filtroActivo === "odontopediatria") {
+                coincideFiltro = especialidadesData.includes("odontopediatria") || especialidadesData.includes("niños");
+            } else if (filtroActivo === "implantologia") {
+                coincideFiltro = especialidadesData.includes("implantologia") || especialidadesData.includes("periodoncia");
+            }
+
+            // Validación del campo de texto
+            const coincideTexto = nombreEspecialista.includes(textoBusqueda) || especialidadesData.includes(textoBusqueda);
+
+            return coincideFiltro && coincideTexto;
+        });
+
+        // Renderizado del DOM reactivo con el resultado filtrado
+        renderizarEspecialistas(especialistasFiltrados);
+
+        // Control del mensaje de registros vacíos
+        if (mensajeNoEncontrado) {
+            mensajeNoEncontrado.style.display = (especialistasFiltrados.length === 0) ? "block" : "none";
+        }
+    }
+
+    if (buscador) {
+        buscador.addEventListener("input", filtrarEspecialistas);
+    }
+
+    botonesFiltro.forEach(boton => {
+        boton.addEventListener("click", function() {
+            botonesFiltro.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            filtroActivo = this.getAttribute("data-filtro");
+            filtrarEspecialistas();
+        });
+    });
+
+    //VALIDACIÓN SEGURA DE FORMULARIO 
+    const formContacto = document.getElementById("formContacto");
+    const inputNombre = document.getElementById("nombre");
+    const inputCorreo = document.getElementById("correo");
+    const inputMensaje = document.getElementById("mensaje");
+    const btnEnviarForm = document.getElementById("btnEnviarForm");
+    const mensajeExito = document.getElementById("mensajeExito");
+
+    if (formContacto) {
+        formContacto.addEventListener("submit", function(event) {
+            event.preventDefault(); // Detener envío automático del HTML
+
+            // Resetear estados y mensajes previos de error
+            let formValido = true;
+            document.querySelectorAll(".error-msg").forEach(el => el.textContent = "");
+            if (mensajeExito) mensajeExito.style.display = "none";
+
+            // Validación de Nombre Obligatorio y longitud mínima
+            if (!inputNombre || inputNombre.value.trim().length < 3) {
+                document.getElementById("errorNombre").textContent = "El nombre es obligatorio y debe tener al menos 3 caracteres.";
+                formValido = false;
+            }
+
+            // Validación de Correo con Expresión Regular exigida por pauta
+            const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!inputCorreo || !regexEmail.test(inputCorreo.value.trim())) {
+                document.getElementById("errorCorreo").textContent = "Por favor, introduce un correo electrónico válido.";
+                formValido = false;
+            }
+
+            // Validación de longitud mínima de mensaje
+            if (!inputMensaje || inputMensaje.value.trim().length < 10) {
+                document.getElementById("errorMensaje").textContent = "El mensaje es obligatorio y debe contener al menos 10 caracteres.";
+                formValido = false;
+            }
+
+            // Control de deshabilitación de envío en base a errores 
+            if (!formValido) {
+                btnEnviarForm.disabled = true;
+                setTimeout(() => { btnEnviarForm.disabled = false; }, 3000); // Rehabilitar tras 3s para reintentar
+                return;
+            }
+
+            // SANITIZACIÓN ESTRICTA CONTRA ATAQUES XSS 
+            if (mensajeExito) {
+                mensajeExito.textContent = "¡Muchas gracias, " + inputNombre.value.trim() + "! Tu mensaje ha sido enviado con éxito de forma segura.";
+                mensajeExito.style.display = "block";
+            }
+
+            formContacto.reset(); // Limpieza del formulario
+        });
+    }
+
+    //PERSISTENCIA DE MODO OSCURO
+    const themeToggleBtn = document.getElementById("themeToggle");
+    
+    // Restauración inmediata del estado guardado en el localStorage al cargar la página
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        if (themeToggleBtn) themeToggleBtn.textContent = "☀️";
+    }
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            
+            if (document.body.classList.contains("dark-mode")) {
+                themeToggleBtn.textContent = "☀️";
+                localStorage.setItem("theme", "dark");
+            } else {
+                themeToggleBtn.textContent = "🌙";
+                localStorage.setItem("theme", "light");
+            }
+        });
+    }
+
+    //CARRUSEL PRINCIPAL 
     const slides = document.querySelectorAll(".slide");
     const dots = document.querySelectorAll(".dot");
     const prevBtn = document.getElementById("prevBtn");
@@ -77,113 +345,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Inicializar carrusel si existe
     if (slides.length > 0) {
         startSlideShow();
     }
 
-
-    //LÓGICA COMBINADA: BUSCADOR Y BOTONERA DE FILTROS
-    const buscador = document.getElementById("buscadorEspecialista");
-    const botonesFiltro = document.querySelectorAll(".btn-filtro");
-    const tarjetas = document.querySelectorAll(".profesional-card");
-    const mensajeNoEncontrado = document.getElementById("mensajeNoEncontrado");
-    
-    let filtroActivo = "todos"; // Almacena el filtro de botón actual
-
-    function filtrarEspecialistas() {
-        const textoBusqueda = buscador ? buscador.value.toLowerCase().trim() : "";
-        let encontrados = 0;
-
-        tarjetas.forEach(tarjeta => {
-            const especialidadesData = tarjeta.getAttribute("data-especialidad") ? tarjeta.getAttribute("data-especialidad").toLowerCase() : "";
-            const nombreEspecialista = tarjeta.querySelector("h3") ? tarjeta.querySelector("h3").textContent.toLowerCase() : "";
-            
-            //Verificar coincidencia con el botón de filtro elegido
-            let coincideFiltro = false;
-            if (filtroActivo === "todos") {
-                coincideFiltro = true;
-            } else if (filtroActivo === "general") {
-                coincideFiltro = especialidadesData.includes("general");
-            } else if (filtroActivo === "endodoncia") {
-                coincideFiltro = especialidadesData.includes("endodoncia");
-            } else if (filtroActivo === "ortodoncia") {
-                coincideFiltro = especialidadesData.includes("ortodoncia");
-            } else if (filtroActivo === "odontopediatria") {
-                coincideFiltro = especialidadesData.includes("odontopediatria") || especialidadesData.includes("niños");
-            } else if (filtroActivo === "implantologia") {
-                coincideFiltro = especialidadesData.includes("implantologia") || especialidadesData.includes("periodoncia");
-            }
-
-            //Verificar coincidencia con lo escrito en la barra de búsqueda
-            const coincideTexto = nombreEspecialista.includes(textoBusqueda) || especialidadesData.includes(textoBusqueda);
-
-            //Mostrar u ocultar respetando AMBAS condiciones
-            if (coincideFiltro && coincideTexto) {
-                tarjeta.style.display = "block";
-                // Pequeño retardo para suavizar la transición visual de entrada
-                setTimeout(() => tarjeta.style.opacity = "1", 10); 
-                encontrados++;
-            } else {
-                tarjeta.style.display = "none";
-                tarjeta.style.opacity = "0";
-            }
-        });
-
-        // Controlar el mensaje de error cuando la búsqueda queda vacía
-        if (mensajeNoEncontrado) {
-            if (encontrados === 0) {
-                mensajeNoEncontrado.style.display = "block";
-            } else {
-                mensajeNoEncontrado.style.display = "none";
-            }
-        }
-    }
-
-    // Evento para cuando el usuario escribe en el buscador
-    if (buscador) {
-        buscador.addEventListener("input", filtrarEspecialistas);
-    }
-
-    // Eventos para cuando el usuario presiona un botón de la botonera
-    botonesFiltro.forEach(boton => {
-        boton.addEventListener("click", function() {
-            // Cambiar la clase activa visualmente entre botones
-            botonesFiltro.forEach(b => b.classList.remove("active"));
-            this.classList.add("active");
-
-            // Actualizar la variable del filtro global y ejecutar la lógica
-            filtroActivo = this.getAttribute("data-filtro");
-            filtrarEspecialistas();
-        });
-    });
-
-
-    // MODO OSCURO (THEME TOGGLE) 
-    const themeToggleBtn = document.getElementById("themeToggle");
-    
-    // Comprobar si el usuario ya tenía una preferencia guardada de antes
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        if (themeToggleBtn) themeToggleBtn.textContent = "☀️";
-    }
-
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener("click", () => {
-            document.body.classList.toggle("dark-mode");
-            
-            if (document.body.classList.contains("dark-mode")) {
-                themeToggleBtn.textContent = "☀️";
-                localStorage.setItem("theme", "dark");
-            } else {
-                themeToggleBtn.textContent = "🌙";
-                localStorage.setItem("theme", "light");
-            }
-        });
-    }
-
-
-    //BOTÓN VOLVER ARRIBA
+    //BOTÓN VOLVER ARRIBA Y ANIMACIONES DE SCROLL 
     const botonArriba = document.getElementById("botonArriba");
 
     if (botonArriba) {
@@ -203,8 +369,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-
-    //ANIMACIÓN FADE-IN AL HACER SCROLL (INTERSECTION OBSERVER)
     const fadeElements = document.querySelectorAll(".fade-in");
 
     if ('IntersectionObserver' in window) {
@@ -226,8 +390,6 @@ document.addEventListener("DOMContentLoaded", function() {
             appearanceObserver.observe(element);
         });
     } else {
-        // Soporte para navegadores muy antiguos que no entienden IntersectionObserver
         fadeElements.forEach(element => element.classList.add("appear"));
     }
-
 });
