@@ -865,11 +865,23 @@ footer {
         padding: 20px;
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         gap: 15px;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
     }
     .nav-menu.active { display: flex; }
     .hero-layout { flex-direction: column; }
     .hero-text h2 { font-size: 2rem; }
-    .dropdown-content { position: static; min-width: 100%; box-shadow: none; padding: 10px 0; }
+    .dropdown-content {
+            display: none;
+            position: static; 
+            width: 100%;
+            box-shadow: none;
+            background-color: transparent; 
+            padding-left: 15px; 
+    }
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
 }
 
 /* MODO OSCURO */

@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hamburger.setAttribute("aria-label", desplegado ? "Cerrar menú de navegación" : "Abrir menú de navegación");
         });
 
-        document.querySelectorAll(".nav-menu a").forEach(link => {
+        document.querySelectorAll(".nav-menu a:not(.dropbtn)").forEach(link => {
             link.addEventListener("click", () => {
                 navMenu.classList.remove("active");
                 hamburger.classList.remove("active");
@@ -98,6 +98,17 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
+    const dropbtn = document.querySelector(".dropbtn");
+    const dropdown = document.querySelector(".dropdown");
+     if ( dropbtn && dropdown) {
+        dropbtn.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
+        });
+    }
+    
 
     //CARGA DINÁMICA DE CONTENIDO EN EL DOM 
     /**
