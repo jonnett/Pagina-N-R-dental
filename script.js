@@ -108,7 +108,30 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-    
+
+    // === LÓGICA DE PAGINACIÓN ===
+    let paginaActual = 1;
+    let especialistasActuales = listaEspecialistas; 
+
+    // Calcula cuántos profesionales caben en "una sola línea" según el tamaño de la pantalla
+    function calcularElementosPorPagina() {
+        const ancho = window.innerWidth;
+        if (ancho <= 768) return 1;  // Celulares: 1 por línea
+        if (ancho <= 1024) return 2; // Tablets: 2 por línea
+        return 3;                    // Computadoras: 3 por línea
+    }
+
+    let elementosPorPagina = calcularElementosPorPagina();
+
+    // Recalcular paginación al redimensionar la ventana
+    window.addEventListener("resize", () => {
+        const nuevosElementos = calcularElementosPorPagina();
+        if (nuevosElementos !== elementosPorPagina) {
+            elementosPorPagina = nuevosElementos;
+            paginaActual = 1;
+            renderizarPaginacion(especialistasActuales);
+        }
+    });
 
     //CARGA DINÁMICA DE CONTENIDO EN EL DOM 
     /**
@@ -157,8 +180,52 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Inicializar la carga con todos los elementos al entrar a la página
-    renderizarEspecialistas(listaEspecialistas);
+    // Corta el arreglo y crea los cuadritos de números
+    function renderizarPaginacion(especialistas) {
+        especialistasActuales = especialistas; 
+        
+        // 1. Cortar la lista para la página actual
+        const inicio = (paginaActual - 1) * elementosPorPagina;
+        const fin = inicio + elementosPorPagina;
+        const especialistasPagina = especialistas.slice(inicio, fin);
+        
+        // 2. Renderizar solo esa parte
+        renderizarEspecialistas(especialistasPagina);
+
+        // 3. Crear los controles de paginación (1, 2, 3...) dinámicamente
+        let contenedorPaginacion = document.getElementById("paginacionEspecialistas");
+        
+        // Si no existe, lo inyectamos automáticamente bajo los especialistas
+        if (!contenedorPaginacion) {
+            contenedorPaginacion = document.createElement("div");
+            contenedorPaginacion.id = "paginacionEspecialistas";
+            contenedorPaginacion.className = "paginacion-container";
+            const contenedorPadre = document.getElementById("contenedorEspecialistas").parentNode;
+            contenedorPadre.insertBefore(contenedorPaginacion, document.getElementById("contenedorEspecialistas").nextSibling);
+        }
+        
+        contenedorPaginacion.innerHTML = ""; // Limpiamos números anteriores
+        const totalPaginas = Math.ceil(especialistas.length / elementosPorPagina);
+
+        // No mostrar la paginación si todos caben en una sola página
+        if (totalPaginas <= 1) return; 
+
+        for (let i = 1; i <= totalPaginas; i++) {
+            const btn = document.createElement("button");
+            btn.className = `btn-paginacion ${i === paginaActual ? "active" : ""}`;
+            btn.textContent = i;
+            
+            btn.addEventListener("click", () => {
+                paginaActual = i;
+                renderizarPaginacion(especialistasActuales);
+            });
+            
+            contenedorPaginacion.appendChild(btn);
+        }
+    }
+
+    // Inicializar la carga con paginación al entrar a la página
+    renderizarPaginacion(listaEspecialistas);
 
     //FILTRO Y BUSQUEDA INTERACTIVA EN TIEMPO REAL 
     const buscador = document.getElementById("buscadorEspecialista");
@@ -200,8 +267,9 @@ document.addEventListener("DOMContentLoaded", function() {
             return coincideFiltro && coincideTexto;
         });
 
-        // Renderizado del DOM reactivo con el resultado filtrado
-        renderizarEspecialistas(especialistasFiltrados);
+        // Renderizado del DOM reactivo con el resultado filtrado y paginado
+        paginaActual = 1;
+        renderizarPaginacion(especialistasFiltrados);
 
         // Control del mensaje de registros vacíos
         if (mensajeNoEncontrado) {

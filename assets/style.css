@@ -541,6 +541,42 @@ section {
     opacity: 1;
 }
 
+/* === ESTILOS PARA LA PAGINACIÓN DE ESPECIALISTAS === */
+.paginacion-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.btn-paginacion {
+    background-color: var(--blanco);
+    color: var(--color-texto);
+    border: 2px solid var(--color-principal);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px; 
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-paginacion:hover {
+    background-color: var(--color-principal);
+    color: var(--blanco);
+}
+
+.btn-paginacion.active {
+    background-color: var(--color-principal);
+    color: var(--blanco);
+    box-shadow: 0 4px 10px rgba(0, 191, 165, 0.3);
+}
+
 /* ESTILOS DEL FORMULARIO DE CONTACTO EXIGIDO POR LA EVALUACIÓN */
 .contacto-container {
     max-width: 600px;
@@ -991,4 +1027,26 @@ footer {
     background-color: #121212;
     color: white;
     border-color: #444;
+}
+
+/* Modo oscuro para los botones de paginación */
+.dark-mode .btn-paginacion {
+    background-color: #1f1f1f;
+    color: #ccc;
+    border-color: #444;
+}
+
+.dark-mode .btn-paginacion:hover {
+    border-color: var(--color-principal);
+    color: var(--blanco);
+}
+
+.dark-mode .btn-paginacion.active {
+    background-color: var(--color-principal);
+    color: var(--blanco);
+    border-color: var(--color-principal);
+}
+.dark-mode .hero-text a {
+    background: var(--color-texto);
+    color: white;
 }
