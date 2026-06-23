@@ -334,13 +334,51 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            // SANITIZACIÓN ESTRICTA CONTRA ATAQUES XSS 
-            if (mensajeExito) {
-                mensajeExito.textContent = "¡Muchas gracias, " + inputNombre.value.trim() + "! Tu mensaje ha sido enviado con éxito de forma segura.";
-                mensajeExito.style.display = "block";
-            }
+            // --- NUEVO CÓDIGO PARA ENVIAR EL CORREO REAL ---
+            
+            // 1. Cambiamos el estado del botón para que el usuario sepa que está cargando
+            const textoOriginal = btnEnviarForm.textContent;
+            btnEnviarForm.textContent = "Enviando...";
+            btnEnviarForm.disabled = true;
 
-            formContacto.reset(); // Limpieza del formulario
+            // 2. Usamos fetch para enviar los datos al correo oficial
+            fetch("https://formsubmit.co/ajax/jonnettmartinez@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    Nombre: inputNombre.value.trim(),
+                    Correo: inputCorreo.value.trim(),
+                    Mensaje: inputMensaje.value.trim(),
+                    _subject: "Nuevo contacto desde la web de N&R Dental" // Asunto personalizado
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 3. Mostramos tu mensaje de éxito original
+                if (mensajeExito) {
+                    // Restauramos el color original por si antes hubo un error
+                    mensajeExito.style.backgroundColor = "#2ecc71"; 
+                    mensajeExito.textContent = "¡Muchas gracias, " + inputNombre.value.trim() + "! Tu mensaje ha sido enviado con éxito de forma segura.";
+                    mensajeExito.style.display = "block";
+                }
+                formContacto.reset(); // Limpieza del formulario
+            })
+            .catch(error => {
+                // 4. Manejo de errores por si falla la conexión
+                if (mensajeExito) {
+                    mensajeExito.textContent = "Lo sentimos, hubo un problema al enviar el mensaje. Intenta nuevamente.";
+                    mensajeExito.style.backgroundColor = "#e74c3c"; // Fondo rojo para error
+                    mensajeExito.style.display = "block";
+                }
+            })
+            .finally(() => {
+                // 5. Restauramos el botón a su estado original
+                btnEnviarForm.textContent = textoOriginal;
+                btnEnviarForm.disabled = false;
+            });
         });
     }
 
