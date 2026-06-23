@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function() {
             btnEnviarForm.disabled = true;
 
             // 2. Usamos fetch para enviar los datos al correo oficial
-            fetch("https://formsubmit.co/ajax/jonnettmartinez@gmail.com", {
+            fetch("https://formsubmit.co/ajax/nehmeriveradental@gmail.com", {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
