@@ -114,12 +114,12 @@ document.addEventListener("DOMContentLoaded", function() {
     let especialistasActuales = listaEspecialistas; 
 
     // Calcula cuántos profesionales caben en "una sola línea" según el tamaño de la pantalla
-    function calcularElementosPorPagina() {
+function calcularElementosPorPagina() {
         const ancho = window.innerWidth;
-        if (ancho <= 768) return 1;  // Celulares: 1 por línea
-        if (ancho <= 1024) return 2; // Tablets: 2 por línea
-        return 3;                    // Computadoras: 3 por línea
-    }
+        if (ancho <= 768) return 2;  // Celulares: 2 especialistas a la vez (2 filas de 2)
+        if (ancho <= 1024) return 3; // Tablets: 3 especialistas a la vez
+        return 3;                    // Computadoras: 3 a la vez
+    }              // Computadoras: 3 por línea
 
     let elementosPorPagina = calcularElementosPorPagina();
 
