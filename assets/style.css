@@ -1050,3 +1050,23 @@ footer {
     background: var(--color-texto);
     color: white;
 }
+/* Ajuste adaptativo para el carrusel de Sobre Nosotros en celulares */
+@media (max-width: 768px) {
+    .nosotros-carousel {
+        height: 250px; /* Reducimos la altura fija para pantallas chicas */
+    }
+
+    .slide img {
+        object-fit: contain; /* Evita que la imagen se corte; se adaptará al contenedor */
+        background-color: rgba(0, 0, 0, 0.05); /* Opcional: un fondo sutil si la imagen tiene proporciones distintas */
+    }
+
+    .overlay {
+        padding: 20px; /* Reducimos el espaciado interno del texto en móvil */
+    }
+
+    .overlay p {
+        font-size: 0.95rem; /* Ajustamos el tamaño de la letra para que quepa bien sobre la imagen */
+        line-height: 1.4;
+    }
+}
