@@ -405,7 +405,116 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    //CARRUSEL PRINCIPAL 
+    // CARRUSEL NOVEDADES (MINI-CARRUSEL): DATOS Y RENDERIZADO DINÁMICO
+    const datosNovedades = [
+        { imagen: "assets/fotos/Novedades/1.png", alt: "Novedad 1" },
+        { imagen: "assets/fotos/Novedades/2.png", alt: "Novedad 2" },
+        { imagen: "assets/fotos/Novedades/3.png", alt: "Novedad 3" }
+    ];
+
+    function renderizarNovedades() {
+        const track = document.getElementById("miniTrackNovedades");
+        if (!track) return;
+
+        track.innerHTML = "";
+        const cantidad = datosNovedades.length;
+
+        // Ajustamos el ancho del track y evitamos que el CSS original rompa la estructura
+        track.style.width = (cantidad * 100) + "%";
+        track.style.animation = "none"; // Anula el @keyframes original
+        track.style.display = "flex";
+        track.style.transition = "transform 1s ease-in-out";
+
+        datosNovedades.forEach(item => {
+            const img = document.createElement("img");
+            img.src = item.imagen;
+            img.alt = item.alt;
+            // Ajustamos el ancho de cada imagen de forma proporcional y automática
+            img.style.width = (100 / cantidad) + "%";
+            img.style.objectFit = "contain";
+            track.appendChild(img);
+        });
+
+        // Lógica de movimiento automático para cualquier cantidad de imágenes
+        let currentMiniSlide = 0;
+        setInterval(() => {
+            if (cantidad <= 1) return; // Si solo hay 1 imagen, no se mueve
+            
+            currentMiniSlide++;
+            if (currentMiniSlide >= cantidad) {
+                currentMiniSlide = 0;
+            }
+            
+            const porcentajeDesplazamiento = (100 / cantidad) * currentMiniSlide;
+            track.style.transform = `translateX(-${porcentajeDesplazamiento}%)`;
+        }, 4000); // Cambia cada 4 segundos
+    }
+
+    renderizarNovedades();
+
+
+    // CARRUSEL PRINCIPAL (NOSOTROS): DATOS Y RENDERIZADO DINÁMICO
+    const datosCarrusel = [
+        {
+            imagen: "assets/fotos/nosotros/1.jpg",
+            alt: "Instalaciones 1",
+            texto: "Somos una clínica dental familiar con más de 10 años de trayectoria cuidando la sonrisa de nuestra comunidad"
+        },
+        {
+            imagen: "assets/fotos/nosotros/2.jpg",
+            alt: "Instalaciones 2",
+            texto: "En NyR Dental, combinamos la experiencia de especialistas titulados en las mejores universidades del país con la innovación de la odontología digital y biomateriales de alta gama."
+        },
+        {
+            imagen: "assets/fotos/nosotros/imagen3.jpeg",
+            alt: "Instalaciones 3",
+            texto: "Creemos que una atención de excelencia no debe perder la calidez. Por eso, aquí no solo encontrarás tecnología de vanguardia, sino también un equipo que te recibe como parte de su propia familia"
+        },
+        {
+            imagen: "assets/fotos/nosotros/4.jpg",
+            alt: "Instalaciones 4",
+            texto: "Nos caracterizamos por nuestra cercanía, ética profesional y el compromiso de ofrecer siempre un precio justo."
+        }
+    ];
+
+    function renderizarCarrusel() {
+        const carruselContenedor = document.getElementById("mainCarousel");
+        const dotsContenedor = document.getElementById("dotsContainer");
+
+        if (!carruselContenedor || !dotsContenedor) return;
+
+        carruselContenedor.innerHTML = "";
+        dotsContenedor.innerHTML = "";
+
+        datosCarrusel.forEach((item, index) => {
+            const slideDiv = document.createElement("div");
+            slideDiv.className = `slide ${index === 0 ? "active" : ""}`;
+
+            const img = document.createElement("img");
+            img.src = item.imagen;
+            img.alt = item.alt;
+
+            const overlayDiv = document.createElement("div");
+            overlayDiv.className = "overlay";
+            
+            const pText = document.createElement("p");
+            pText.textContent = item.texto;
+            
+            overlayDiv.appendChild(pText);
+            slideDiv.appendChild(img);
+            slideDiv.appendChild(overlayDiv);
+            carruselContenedor.appendChild(slideDiv);
+
+            const dotSpan = document.createElement("span");
+            dotSpan.className = `dot ${index === 0 ? "active" : ""}`;
+            dotsContenedor.appendChild(dotSpan);
+        });
+    }
+
+    // Inicializamos el carrusel y creamos los elementos en el HTML
+    renderizarCarrusel();
+
+    // Ahora sí seleccionamos los elementos que acabamos de crear en la línea anterior
     const slides = document.querySelectorAll(".slide");
     const dots = document.querySelectorAll(".dot");
     const prevBtn = document.getElementById("prevBtn");
@@ -423,8 +532,8 @@ document.addEventListener("DOMContentLoaded", function() {
         else if (index < 0) currentSlide = slides.length - 1;
         else currentSlide = index;
 
-        slides[currentSlide].classList.add("active");
-        if (dots[currentSlide]) dots[currentSlide].classList.add("active");
+        if(slides[currentSlide]) slides[currentSlide].classList.add("active");
+        if(dots[currentSlide]) dots[currentSlide].classList.add("active");
     }
 
     function nextSlide() {

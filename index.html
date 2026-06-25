@@ -68,11 +68,8 @@
                 <div class="hero-novedades">
                     <h3>Novedades</h3>
                     <div class="mini-carrusel">
-                        <div class="mini-track">
-                            <img src="assets/fotos/Novedades/1.png" alt="Novedad 1">
-                            <img src="assets/fotos/Novedades/2.png" alt="Novedad 2">
-                            <img src="assets/fotos/Novedades/3.png" alt="Novedad 3">
-                        </div>
+                        <!-- Contenedor dinámico de Novedades -->
+                        <div class="mini-track" id="miniTrackNovedades"></div>
                     </div>
                 </div>
             </div>
@@ -85,47 +82,14 @@
             </div>
 
             <div class="carousel-container">
-                <div class="nosotros-carousel" id="mainCarousel">
-                    <div class="slide active">
-                        <img src="assets/fotos/nosotros/1.jpg" alt="Instalaciones 1">
-                        <div class="overlay">
-                            <p>Somos una clínica dental familiar con más de 10 años de trayectoria cuidando la sonrisa de nuestra comunidad</p>
-                        </div>
-                    </div>
-
-                    <div class="slide">
-                        <img src="assets/fotos/nosotros/2.jpg" alt="Instalaciones 2">
-                        <div class="overlay">
-                            <p>En NyR Dental, combinamos la experiencia de especialistas titulados en las mejores universidades del país con la innovación de la odontología digital y biomateriales de alta gama.</p>
-                        </div>
-                    </div>
-
-                    <div class="slide">
-                        <img src="assets/fotos/nosotros/imagen3.jpeg" alt="Instalaciones 3">
-                        <div class="overlay">
-                            <p>Creemos que una atención de excelencia no debe perder la calidez. Por eso, aquí no solo encontrarás tecnología de vanguardia, sino también un equipo que te recibe como parte de su propia familia</p>
-                        </div>
-                    </div>
-
-                    <div class="slide">
-                        <img src="assets/fotos/nosotros/4.jpg" alt="Instalaciones 4">
-                        <div class="overlay">
-                            <p>Nos caracterizamos por nuestra cercanía, ética profesional y el compromiso de ofrecer siempre un precio justo.</p>
-                        </div>
-                    </div>
-                </div>
+                <div class="nosotros-carousel" id="mainCarousel"></div>
 
                 <div class="arrows">
                     <div class="prev" id="prevBtn">❮</div>
                     <div class="next" id="nextBtn">❯</div>
                 </div>
 
-                <div class="dots" id="dotsContainer">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
+                <div class="dots" id="dotsContainer"></div>
             </div>
         </section>
 
