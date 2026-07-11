@@ -409,7 +409,10 @@ function calcularElementosPorPagina() {
     const datosNovedades = [
         { imagen: "assets/fotos/Novedades/1.png", alt: "Novedad 1" },
         { imagen: "assets/fotos/Novedades/2.png", alt: "Novedad 2" },
-        { imagen: "assets/fotos/Novedades/3.png", alt: "Novedad 3" }
+        { imagen: "assets/fotos/Novedades/3.png", alt: "Novedad 3" },
+        { imagen: "assets/fotos/Novedades/4.png", alt: "Novedad 4" },
+        { imagen: "assets/fotos/Novedades/5.png", alt: "Novedad 5" },
+        { imagen: "assets/fotos/Novedades/6.png", alt: "Novedad 6" },
     ];
 
     function renderizarNovedades() {
@@ -447,7 +450,7 @@ function calcularElementosPorPagina() {
             
             const porcentajeDesplazamiento = (100 / cantidad) * currentMiniSlide;
             track.style.transform = `translateX(-${porcentajeDesplazamiento}%)`;
-        }, 4000); // Cambia cada 4 segundos
+        }, 6000); // Cambia cada 6 segundos
     }
 
     renderizarNovedades();
