@@ -211,6 +211,24 @@ nav {
     object-fit: contain;
 }
 
+.mini-carrusel {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease !important;
+}
+
+.mini-carrusel.zoom-activo {
+    transform: scale(1.10); /* Cambia a 1.40 si quieres que salte aún más hacia el frente */
+    z-index: 999 !important; /* Pasa por encima de títulos y textos del fondo */
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4); /* Sombra intensa de flotación */
+    border-radius: 12px;
+}
+
+.mini-carrusel-img {
+    cursor: pointer;
+}
+
 @keyframes autoScrollMini {
     0%, 20% { transform: translateX(0); }
     33%, 53% { transform: translateX(-33.33%); }

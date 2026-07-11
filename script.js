@@ -415,16 +415,16 @@ function calcularElementosPorPagina() {
         { imagen: "assets/fotos/Novedades/6.png", alt: "Novedad 6" },
     ];
 
-    function renderizarNovedades() {
+function renderizarNovedades() {
+        const carruselContenedor = document.querySelector(".mini-carrusel");
         const track = document.getElementById("miniTrackNovedades");
-        if (!track) return;
+        if (!track || !carruselContenedor) return;
 
         track.innerHTML = "";
         const cantidad = datosNovedades.length;
 
-        // Ajustamos el ancho del track y evitamos que el CSS original rompa la estructura
         track.style.width = (cantidad * 100) + "%";
-        track.style.animation = "none"; // Anula el @keyframes original
+        track.style.animation = "none"; 
         track.style.display = "flex";
         track.style.transition = "transform 1s ease-in-out";
 
@@ -432,27 +432,73 @@ function calcularElementosPorPagina() {
             const img = document.createElement("img");
             img.src = item.imagen;
             img.alt = item.alt;
-            // Ajustamos el ancho de cada imagen de forma proporcional y automática
             img.style.width = (100 / cantidad) + "%";
             img.style.objectFit = "contain";
+            img.classList.add("mini-carrusel-img");
             track.appendChild(img);
         });
 
-        // Lógica de movimiento automático para cualquier cantidad de imágenes
         let currentMiniSlide = 0;
-        setInterval(() => {
-            if (cantidad <= 1) return; // Si solo hay 1 imagen, no se mueve
-            
+        let miniCarruselInterval = null;
+        let esDispositivoTactil = false;
+
+        function moverCarrusel() {
+            if (cantidad <= 1) return;
             currentMiniSlide++;
             if (currentMiniSlide >= cantidad) {
                 currentMiniSlide = 0;
             }
-            
             const porcentajeDesplazamiento = (100 / cantidad) * currentMiniSlide;
             track.style.transform = `translateX(-${porcentajeDesplazamiento}%)`;
-        }, 6000); // Cambia cada 6 segundos
-    }
+        }
 
+        function iniciarAutomovimiento() {
+            if (!miniCarruselInterval) {
+                miniCarruselInterval = setInterval(moverCarrusel, 4000); 
+            }
+        }
+
+        function detenerAutomovimiento() {
+            if (miniCarruselInterval) {
+                clearInterval(miniCarruselInterval);
+                miniCarruselInterval = null;
+            }
+        }
+
+        // --- FUNCIONES PARA ENCENDER Y APAGAR EL ZOOM REAL ---
+        function activarZoom() {
+            detenerAutomovimiento();
+            carruselContenedor.classList.add("zoom-activo");
+        }
+
+        function desactivarZoom() {
+            carruselContenedor.classList.remove("zoom-activo");
+            iniciarAutomovimiento();
+        }
+
+        // --- EVENTOS MOUSE (Computadoras) ---
+        carruselContenedor.addEventListener("mouseenter", () => {
+            if (!esDispositivoTactil) activarZoom();
+        });
+
+        carruselContenedor.addEventListener("mouseleave", () => {
+            if (!esDispositivoTactil) desactivarZoom();
+        });
+
+        // --- EVENTOS TÁCTILES (Teléfonos) ---
+        carruselContenedor.addEventListener("touchstart", (e) => {
+            esDispositivoTactil = true;
+            activarZoom();
+        }, { passive: true });
+
+        document.addEventListener("touchstart", (e) => {
+            if (!carruselContenedor.contains(e.target)) {
+                desactivarZoom();
+            }
+        }, { passive: true });
+
+        iniciarAutomovimiento();
+    }
     renderizarNovedades();
 
 
